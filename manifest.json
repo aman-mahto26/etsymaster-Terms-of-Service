@@ -1,0 +1,82 @@
+{
+  "manifest_version": 3,
+  "name": "EtsyMaster: Listing Scraper & SEO Auditor",
+  "version": "1.6.8",
+  "description": "1-Click Etsy listing scraper, deep competitor SEO auditor, multi-page crawler, and AI research prompt synthesizer.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "tabs",
+    "scripting",
+    "downloads",
+    "identity",
+    "alarms"
+  ],
+  "oauth2": {
+    "client_id": "825872815105-fdnve1mnlb9mri052e977og9s572407l.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "host_permissions": [
+    "*://*.etsy.com/*",
+    "*://*.etsystatic.com/*",
+    "https://script.google.com/*",
+    "https://script.googleusercontent.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "EtsyMaster: Listing Scraper & SEO Auditor",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.etsy.com/*"
+      ],
+      "js": [
+        "vendor/xlsx.full.min.js",
+        "export/excel-builder.js",
+        "content/schema.js",
+        "content/seo-analyzer.js",
+        "content/strategy-engine.js",
+        "content/scraper-core.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "vendor/xlsx.full.min.js",
+        "vendor/jszip.min.js",
+        "export/excel-builder.js",
+        "assets/*"
+      ],
+      "matches": [
+        "*://*.etsy.com/*"
+      ]
+    }
+  ]
+}
